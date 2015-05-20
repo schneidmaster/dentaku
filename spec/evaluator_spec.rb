@@ -108,10 +108,12 @@ describe Dentaku::Evaluator do
 
     describe 'functions' do
       it 'is evaluated' do
-        expect(evaluator.evaluate(token_stream(:round,     :fopen, 5, :divide, 3.0, :close))).to eq 2
-        expect(evaluator.evaluate(token_stream(:round,     :fopen, 5, :divide, 3.0, :comma, 2, :close))).to eq 1.67
-        expect(evaluator.evaluate(token_stream(:roundup,   :fopen, 5, :divide, 1.2, :close))).to eq 5
-        expect(evaluator.evaluate(token_stream(:rounddown, :fopen, 5, :divide, 1.2, :close))).to eq 4
+        expect(evaluator.evaluate(token_stream(:if, :fopen, 3, :lt, 5, :comma, 5, :comma, 0, :close, :subtract, 3))).to eq 2
+        expect(evaluator.evaluate(token_stream(:if, :fopen, 3, :lt, 5, :comma, 5, :comma, 0, :close, :add, 3))).to eq 8
+        expect(evaluator.evaluate(token_stream(:round,     :fopen, 5,   :divide, 3.0, :close))).to eq 2
+        expect(evaluator.evaluate(token_stream(:round,     :fopen, 5,   :divide, 3.0, :comma, 2, :close))).to eq 1.67
+        expect(evaluator.evaluate(token_stream(:roundup,   :fopen, 5,   :divide, 1.2, :close))).to eq 5
+        expect(evaluator.evaluate(token_stream(:rounddown, :fopen, 5,   :divide, 1.2, :close))).to eq 4
       end
     end
 

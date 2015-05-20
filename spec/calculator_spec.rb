@@ -154,6 +154,7 @@ describe Dentaku::Calculator do
       expect(calculator.evaluate('if(foo < 8, 10, 20)', foo: 9)).to eq(20)
       expect(calculator.evaluate('if (foo < 8, 10, 20)', foo: 2)).to eq(10)
       expect(calculator.evaluate('if (foo < 8, 10, 20)', foo: 9)).to eq(20)
+      expect(calculator.evaluate('if (foo < 5, 5, 0) - 3', foo: 3)).to eq(2)
     end
 
     it 'include ROUND' do

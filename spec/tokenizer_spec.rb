@@ -135,6 +135,13 @@ describe Dentaku::Tokenizer do
       expect(tokens.map(&:value)).to eq([:if, :fopen, 'x', :lt, 10, :comma, 'y', :comma, 'z', :close])
     end
 
+    it 'includes IF minus a constant' do
+      tokens = tokenizer.tokenize('if(x < 10, y, z) - 3')
+      expect(tokens.length).to eq(12)
+      expect(tokens.map(&:category)).to eq([:function, :grouping, :identifier, :comparator, :numeric, :grouping, :identifier, :grouping, :identifier, :grouping, :operator, :numeric])
+      expect(tokens.map(&:value)).to eq([:if, :fopen, 'x', :lt, 10, :comma, 'y', :comma, 'z', :close, :subtract, 3])
+    end
+
     it 'include ROUND/UP/DOWN' do
       tokens = tokenizer.tokenize('round(8.2)')
       expect(tokens.length).to eq(4)
